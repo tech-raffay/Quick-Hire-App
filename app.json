@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "quick-hire-rn",
+    "slug": "quick-hire",
+    "privacy": "public",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.raffay.quickhire",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.raffay.quickhire",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a7d4a61b-545a-432f-8974-1d15bafe292c"
+      }
+    },
+    "owner": "tech-raffays-organization",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a7d4a61b-545a-432f-8974-1d15bafe292c"
+    }
+  }
+}
