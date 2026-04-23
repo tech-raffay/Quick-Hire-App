@@ -1,4 +1,4 @@
-# 🚀 QuickHire
+#  QuickHire
 
 QuickHire is a high-performance, cross-platform mobile application designed to bridge the gap between top talent and recruiters. Built with **React Native** and **Expo**, the app delivers a premium, native-feeling user experience with real-time data synchronization and automated deployment.
 
