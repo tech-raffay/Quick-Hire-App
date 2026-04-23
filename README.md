@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# 🚀 QuickHire
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+QuickHire is a high-performance, cross-platform mobile application designed to bridge the gap between top talent and recruiters. Built with **React Native** and **Expo**, the app delivers a premium, native-feeling user experience with real-time data synchronization and automated deployment.
 
-## Available Scripts
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React Native](https://img.shields.io/badge/React_Native-0.74+-61DAFB?logo=react)
+![Expo](https://img.shields.io/badge/Expo-SDK_50+-000020?logo=expo)
+![Firebase](https://img.shields.io/badge/Firebase-Auth_&_Firestore-FFCA28?logo=firebase)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👤 For Job Seekers
+- **Smart Discovery**: Browse and filter curated job opportunities in real-time.
+- **One-Click Apply**: Apply to roles instantly with your pre-uploaded resume.
+- **Profile Management**: Build a professional profile with cloud-hosted avatars and PDF resumes.
+- **Saved Jobs**: Keep track of opportunities you're interested in for later.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🏢 For Recruiters
+- **Job Lifecycle Management**: Post, edit, and manage job listings with ease.
+- **Applicant Tracking**: View detailed applicant profiles and review resumes directly within the app.
+- **Real-Time Analytics**: Monitor application counts and job performance at a glance.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎨 Design & UX
+QuickHire prioritizes a modern, "Glassmorphic" aesthetic with:
+- **Custom Spring Animations**: Smooth screen transitions and tab switching powered by React Native's Native Driver.
+- **Safe Area Optimization**: Seamless UI across all devices, including notches and status bar protection.
+- **Interactive States**: Loading skeletons, spinners, and disabled states for a robust feel during network requests.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Technical Architecture
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**: React Native with Expo SDK for cross-platform compatibility.
+- **Backend**: 
+  - **Firebase Auth**: Secure, managed user authentication.
+  - **Cloud Firestore**: Real-time NoSQL database for jobs and applications.
+- **Storage**: **Appwrite Storage** for high-availability file hosting (Resumes/Images).
+- **Automation (DevOps)**: GitHub Actions workflow for automated **EAS Updates**, ensuring the live app is always in sync with the repository.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+- Node.js (v18+)
+- Expo Go app on your mobile device
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tech-raffay/Quick-Hire-App.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npx expo start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📦 Deployment
+This project uses **EAS (Expo Application Services)** for cloud builds and updates.
 
-## Learn More
+- **Production Branch**: `main`
+- **Automation**: GitHub Actions automatically deploys a new EAS Update whenever code is pushed to `main`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Developed with ❤️ by Raffay Khan**  
+[Expo Project Page](https://expo.dev/@tech-raffays-organization/projects/quick-hire) | [GitHub](https://github.com/tech-raffay)
