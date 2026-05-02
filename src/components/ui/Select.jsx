@@ -1,16 +1,42 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { COLORS, FONTS } from '../../constants';
 
 const Select = ({ label, value, onValueChange, options }) => (
   <View style={{ marginBottom: 16 }}>
-    <Text style={{ fontSize: 11, fontFamily: FONTS.bodySemiBold, color: COLORS.textSecondary, marginBottom: 6, letterSpacing: 0.7, textTransform: 'uppercase' }}>{label}</Text>
-    <View style={{ backgroundColor: COLORS.card, borderWidth: 1, borderColor: COLORS.border, borderRadius: 10, overflow: 'hidden' }}>
-      <Picker selectedValue={value} onValueChange={onValueChange} style={{ color: COLORS.textPrimary, height: 50 }} dropdownIconColor={COLORS.textMuted}>
-        {options.map(o => <Picker.Item key={o.value} label={o.label} value={o.value} color={COLORS.textPrimary} style={{ backgroundColor: COLORS.card }} />)}
-      </Picker>
-    </View>
+    <Text style={{ fontSize: 11, fontFamily: FONTS.bodySemiBold, color: COLORS.textSecondary, marginBottom: 8, letterSpacing: 0.7, textTransform: 'uppercase' }}>
+      {label}
+    </Text>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <View style={{ flexDirection: 'row', gap: 8 }}>
+        {options.map(o => {
+          const active = value === o.value;
+          return (
+            <TouchableOpacity
+              key={o.value}
+              onPress={() => onValueChange(o.value)}
+              activeOpacity={0.75}
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 9,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: active ? COLORS.recruiterAccent : COLORS.border,
+                backgroundColor: active ? COLORS.recruiterAccent + '22' : COLORS.surface,
+              }}
+            >
+              <Text style={{
+                fontSize: 13,
+                fontFamily: active ? FONTS.bodySemiBold : FONTS.bodyMedium,
+                color: active ? COLORS.recruiterAccent : COLORS.textSecondary,
+              }}>
+                {o.label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </ScrollView>
   </View>
 );
 

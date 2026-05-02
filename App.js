@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { View, ActivityIndicator, Animated, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, Animated, StyleSheet, StatusBar } from 'react-native';
 import {
   useFonts,
   Inter_400Regular,
@@ -14,11 +14,11 @@ import {
 } from '@expo-google-fonts/manrope';
 
 import { COLORS } from './src/constants';
+import { ThemeProvider, useTheme } from './src/ThemeContext';
 import LandingScreen from './src/screens/LandingScreen';
 import AuthScreen    from './src/screens/AuthScreen';
 import RecruiterApp  from './src/recruiter/RecruiterApp';
 import SeekerApp     from './src/seeker/SeekerApp';
-
 import FadeInView from './src/components/ui/FadeInView';
 
 // ─── Full-screen fade-out overlay ────────────────────────────────────────────
@@ -45,8 +45,16 @@ const TransitionOverlay = ({ visible, onDone }) => {
   );
 };
 
-// ─── Main App ────────────────────────────────────────────────────────────────
 export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
+  );
+}
+
+function AppInner() {
+  const { isDark } = useTheme();
   const [screen, setScreen]           = useState('landing');
   const [role,   setRole]             = useState(null);
   const [user,   setUser]             = useState(null);
@@ -128,6 +136,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.bg }}>
+      <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} backgroundColor={COLORS.surface} />
       {renderScreen()}
       <TransitionOverlay visible={transitioning} onDone={handleOverlayDone} />
     </View>

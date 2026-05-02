@@ -1,4 +1,4 @@
-export const COLORS = {
+export const DARK_COLORS = {
   bg: "#0A0F1E",
   surface: "#111827",
   card: "#161D2F",
@@ -17,6 +17,33 @@ export const COLORS = {
   seekerAccent: "#3B82F6",
   tagBg: "#1A2540",
 };
+
+export const LIGHT_COLORS = {
+  bg: "#F3F2EF",
+  surface: "#FFFFFF",
+  card: "#FFFFFF",
+  border: "#E0DFDB",
+  accent: "#0A66C2",
+  accentDark: "#004182",
+  accentGlow: "rgba(10,102,194,0.12)",
+  success: "#057642",
+  warning: "#B24020",
+  danger: "#CC1016",
+  textPrimary: "#000000",
+  textSecondary: "#555555",
+  textMuted: "#999999",
+  recruiterAccent: "#6B21A8",
+  recruiterGlow: "rgba(107,33,168,0.10)",
+  seekerAccent: "#0A66C2",
+  tagBg: "#EEF3F8",
+};
+
+// Mutable object — mutated by applyTheme, read fresh on every render
+export const COLORS = { ...DARK_COLORS };
+
+export const applyTheme = (isDark) =>
+  Object.assign(COLORS, isDark ? DARK_COLORS : LIGHT_COLORS);
+
 
 export const FONTS = {
   body: "Inter_400Regular",
@@ -48,4 +75,5 @@ export const store = {
   recruiters: { ...INITIAL_RECRUITERS },
   seekers: { ...INITIAL_SEEKERS },
   applications: [],
+  deletedJobIds: new Set(),
 };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Drawer from '../components/Drawer';
 import Avatar from '../components/ui/Avatar';
 import { XIcon, SearchIcon, BookmarkIcon, FileTextIcon, UserIcon, SettingsIcon, HelpIcon, LogOutIcon, EditIcon, ZapIcon, BellIcon } from '../components/Icons';
@@ -20,7 +20,7 @@ const NavItem = ({ icon, label, active, onPress, badge }) => {
 
 const Divider = () => <View style={{ height: 1, backgroundColor: COLORS.border, marginVertical: 8 }} />;
 
-const SeekerDrawer = ({ isOpen, onClose, tab, setTab, user, onLogout, appliedCount, savedCount, onEditProfile }) => {
+const SeekerDrawer = ({ isOpen, onClose, tab, setTab, user, onLogout, appliedCount, savedCount, onEditProfile, onComingSoon, notifCount }) => {
   const accent = COLORS.accent;
   const handleNav = id => { setTab(id); onClose(); };
 
@@ -70,11 +70,11 @@ const SeekerDrawer = ({ isOpen, onClose, tab, setTab, user, onLogout, appliedCou
       <Divider />
       <Text style={{ paddingHorizontal: 20, paddingTop: 6, paddingBottom: 4, fontSize: 10, fontFamily: FONTS.bodySemiBold, color: COLORS.textMuted, letterSpacing: 1, textTransform: 'uppercase' }}>Quick Actions</Text>
       <NavItem icon={<EditIcon size={18} color={COLORS.textSecondary} />} label="Update Resume"   active={false} onPress={() => { handleNav('profile'); onEditProfile(); }} />
-      <NavItem icon={<BellIcon size={18} color={COLORS.textSecondary} />} label="Notifications"   active={false} onPress={onClose} />
+      <NavItem icon={<BellIcon size={18} color={tab === 'notifications' ? COLORS.accent : COLORS.textSecondary} />} label="Notifications" active={tab === 'notifications'} onPress={() => handleNav('notifications')} badge={notifCount} />
 
       <Divider />
-      <NavItem icon={<SettingsIcon size={18} color={COLORS.textSecondary} />} label="Settings"       active={false} onPress={onClose} />
-      <NavItem icon={<HelpIcon     size={18} color={COLORS.textSecondary} />} label="Help & Support"  active={false} onPress={onClose} />
+      <NavItem icon={<SettingsIcon size={18} color={COLORS.textSecondary} />} label="Settings"       active={false} onPress={() => { onClose(); setTimeout(() => onComingSoon('Settings'), 600); }} />
+      <NavItem icon={<HelpIcon     size={18} color={COLORS.textSecondary} />} label="Help & Support"  active={false} onPress={() => { onClose(); setTimeout(() => onComingSoon('Help & Support'), 600); }} />
 
       <View style={{ padding: 16, borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: 8 }}>
         <TouchableOpacity onPress={onLogout} activeOpacity={0.8}

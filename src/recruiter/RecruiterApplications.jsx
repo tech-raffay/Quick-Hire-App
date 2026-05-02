@@ -7,7 +7,7 @@ import Pill from '../components/ui/Pill';
 import Avatar from '../components/ui/Avatar';
 import Btn from '../components/ui/Btn';
 import { db } from '../firebase';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, addDoc, collection } from 'firebase/firestore';
 import { getAvatarUrl, getResumeUrl } from '../utils';
 
 const FILTERS = ['all', 'pending', 'reviewed', 'shortlisted', 'rejected'];
@@ -17,12 +17,30 @@ const RecruiterApplications = ({ applications, realUsers, allJobs }) => {
   const [filter, setFilter] = useState('all');
   const [, forceUpdate] = useState(0);
   const filtered = filter === 'all' ? applications : applications.filter(a => a.status === filter);
-  const updateStatus = async (app, status) => { 
+  const updateStatus = async (app, status, jobTitle) => {
     if (typeof app.id === 'string' && app.id.length > 5) {
       await updateDoc(doc(db, 'applications', app.id), { status });
     } else {
       app.status = status; forceUpdate(n => n + 1);
     }
+    // Notify the seeker
+    const msgs = {
+      shortlisted: `🎉 Congratulations! You've been shortlisted for ${jobTitle}`,
+      reviewed:    `Your application for ${jobTitle} has been reviewed by the recruiter`,
+      rejected:    `Your application for ${jobTitle} was not selected this time`,
+    };
+    try {
+      await addDoc(collection(db, 'notifications'), {
+        recipientId:   app.seekerId,
+        recipientType: 'seeker',
+        type:          'status_update',
+        status,
+        jobTitle,
+        message:       msgs[status] || `Your application status was updated to ${status}`,
+        createdAt:     new Date().toISOString(),
+        read:          false,
+      });
+    } catch (e) { console.warn('Notification write failed', e); }
   };
 
   return (
@@ -61,9 +79,9 @@ const RecruiterApplications = ({ applications, realUsers, allJobs }) => {
               </View>
               {/* Row 1: status actions */}
               <View style={{ marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: COLORS.border, flexDirection: 'row', gap: 8 }}>
-                <Btn size="sm" variant="success" onPress={() => updateStatus(app, 'shortlisted')}>Shortlist</Btn>
-                <Btn size="sm" variant="muted"   onPress={() => updateStatus(app, 'reviewed')}>Review</Btn>
-                <Btn size="sm" variant="danger"  onPress={() => updateStatus(app, 'rejected')}>Reject</Btn>
+                <Btn size="sm" variant="success" onPress={() => updateStatus(app, 'shortlisted', job ? job.title : 'the position')}>Shortlist</Btn>
+                <Btn size="sm" variant="muted"   onPress={() => updateStatus(app, 'reviewed',    job ? job.title : 'the position')}>Review</Btn>
+                <Btn size="sm" variant="danger"  onPress={() => updateStatus(app, 'rejected',    job ? job.title : 'the position')}>Reject</Btn>
               </View>
               {/* Row 2: resume (only when available) */}
               {(() => {

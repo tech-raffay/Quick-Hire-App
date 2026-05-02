@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Drawer from '../components/Drawer';
 import Avatar from '../components/ui/Avatar';
 import { XIcon, DashboardIcon, BriefcaseIcon, FileTextIcon, UserIcon, PlusIcon, SettingsIcon, HelpIcon, LogOutIcon, ShieldIcon, BellIcon, BarChartIcon } from '../components/Icons';
@@ -17,7 +17,7 @@ const NavItem = ({ icon, label, active, accent, onPress, badge }) => (
 
 const Divider = () => <View style={{ height: 1, backgroundColor: COLORS.border, marginVertical: 8 }} />;
 
-const RecruiterDrawer = ({ isOpen, onClose, tab, setTab, user, onPostJob, onLogout, jobCount, appCount, onEditProfile }) => {
+const RecruiterDrawer = ({ isOpen, onClose, tab, setTab, user, onPostJob, onLogout, jobCount, appCount, onEditProfile, onComingSoon, notifCount }) => {
   const accent = COLORS.recruiterAccent;
   const handleNav = id => { setTab(id); onClose(); };
 
@@ -65,12 +65,12 @@ const RecruiterDrawer = ({ isOpen, onClose, tab, setTab, user, onPostJob, onLogo
 
       <Divider />
       <Text style={{ paddingHorizontal: 20, paddingTop: 6, paddingBottom: 4, fontSize: 10, fontFamily: FONTS.bodySemiBold, color: COLORS.textMuted, letterSpacing: 1, textTransform: 'uppercase' }}>More</Text>
-      <NavItem icon={<BarChartIcon size={18} color={COLORS.textSecondary} />} label="Analytics"      active={false} accent={accent} onPress={onClose} />
-      <NavItem icon={<BellIcon     size={18} color={COLORS.textSecondary} />} label="Notifications"  active={false} accent={accent} onPress={onClose} />
+      <NavItem icon={<BarChartIcon size={18} color={tab === 'analytics'      ? accent : COLORS.textSecondary} />} label="Analytics"      active={tab === 'analytics'}      accent={accent} onPress={() => handleNav('analytics')} />
+      <NavItem icon={<BellIcon     size={18} color={tab === 'notifications'   ? accent : COLORS.textSecondary} />} label="Notifications"  active={tab === 'notifications'}   accent={accent} onPress={() => handleNav('notifications')} badge={notifCount} />
 
       <Divider />
-      <NavItem icon={<SettingsIcon size={18} color={COLORS.textSecondary} />} label="Settings"       active={false} accent={accent} onPress={onClose} />
-      <NavItem icon={<HelpIcon     size={18} color={COLORS.textSecondary} />} label="Help & Support"  active={false} accent={accent} onPress={onClose} />
+      <NavItem icon={<SettingsIcon size={18} color={COLORS.textSecondary} />} label="Settings"       active={false} accent={accent} onPress={() => { onClose(); setTimeout(() => onComingSoon('Settings'), 600); }} />
+      <NavItem icon={<HelpIcon     size={18} color={COLORS.textSecondary} />} label="Help & Support"  active={false} accent={accent} onPress={() => { onClose(); setTimeout(() => onComingSoon('Help & Support'), 600); }} />
 
       <View style={{ marginTop: 'auto', padding: 16, borderTopWidth: 1, borderTopColor: COLORS.border }}>
         <TouchableOpacity onPress={onLogout} activeOpacity={0.8}
